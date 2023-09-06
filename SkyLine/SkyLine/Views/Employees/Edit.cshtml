@@ -1,0 +1,114 @@
+﻿@model Employee
+
+<h1 class="alert alert-info text-center">Edit Employee</h1>
+
+<partial name="_TechnicalSupportContacts" />
+<div class="row">
+    <form class="col-4" method="post" asp-controller="Employees" asp-action="EditCurrent" enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImagePath" />
+
+        <div>
+            <label asp-for="FullName"></label>
+            <input type="text" asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Position"></label>
+            <input type="text" asp-for="Position" class="form-control" />
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Salary"></label>
+            <input type="number" asp-for="Salary" class="form-control" />
+            <span asp-validation-for="Salary" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="BirthDate"></label>
+            <input asp-for="BirthDate" class="form-control" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="JoinDateTime"></label>
+            <input asp-for="JoinDateTime" class="form-control" />
+            <span asp-validation-for="JoinDateTime" class="text-danger"></span>
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="IsActive"></label>
+            <input type="checkbox" asp-for="IsActive" />
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="AttendanceTime"></label>
+            <input asp-for="AttendanceTime" class="form-control" />
+            <span asp-validation-for="AttendanceTime" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Code"></label>
+            <input asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ConfirmCode"></label>
+            <input asp-for="ConfirmCode" class="form-control" />
+            <span asp-validation-for="ConfirmCode" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="DepartmentId"></label>
+            <select class="form-control" asp-for="DepartmentId"
+                    asp-items="@(new SelectList(ViewBag.AllDepartments, "Id", "Description"))">
+                <option selected disabled>Select...</option>
+            </select>
+            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ImagePath"></label>
+            <input type="file" name="imageFormFile" id="imageFormFile" accept=".png,.jpg" class="form-control" onchange="AddImage()" />
+            <span asp-validation-for="ImagePath"></span>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary mt-2 col-12 fw-bold">Edit</button>
+            <a asp-controller="Employees" asp-action="GetIndexView" class="btn btn-success mt-2 col-12 fw-bold">
+                <i class="bi bi-arrow-left-circle"> Back to List</i>
+            </a>
+        </div>
+    </form>
+
+    <div class="col-4">
+        <img src="@Model.ImagePath" id="empImage" style="width:100%; aspect-ratio:1/1" class="card" />
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function AddImage() {
+            document.getElementById('empImage').src = window.URL.createObjectURL(document.getElementById('imageFormFile').files[0]);
+
+            // var input = document.getElementById('imageFormFile');
+            // var imgFile = input.files[0];
+            // var imgUrl = window.URL.createObjectURL(imgFile);
+            // var imgElement = document.getElementById('empImage');
+            // imgElement.src = imgUrl;
+        }
+    </script>
+}

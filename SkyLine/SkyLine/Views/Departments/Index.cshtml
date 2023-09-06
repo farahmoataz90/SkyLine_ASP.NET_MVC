@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Department>
+
+<h1 class="alert alert-success">Departments Index</h1>
+
+<a asp-controller="Departments" asp-action="GetCreateView" class="btn btn-success mb-1">Create New</a>
+
+
+<div class="row mb-2">
+
+    <form method="get" class="col-4">
+        <input type="hidden" name="pageSize" value="@ViewBag.PageSize" />
+        <input type="hidden" name="pageNumber" value="@ViewBag.PageNumber" />
+
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" value="@ViewBag.CurrentSearch" />
+            <button type="submit" class="btn btn-secondary input-group-append"><i class="bi bi-search"></i></button>
+        </div>
+
+    </form>
+
+    @*pagination*@
+
+    <form method="get" asp-controller="Departments" asp-action="GetIndexView" class="col-4">
+
+        <div class="input-group">
+            <input type="hidden" name="search" value="@ViewBag.CurrentSearch" />
+
+            <input type="number" name="pageSize" id="pageSize" title="Page Size" value="@ViewBag.PageSize" class="text-center col-2" />
+            <input type="number" name="pageNumber" id="pageNumber" title="Page Number" value="@ViewBag.PageNumber" class="text-center col-2" />
+            <button type="submit" class="btn btn-secondary input-group-append"><i class="bi bi-file-earmark"></i></button>
+
+        </div>
+
+
+    </form>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(d=>d.Id)</th>
+                @*<th>@Html.DisplayNameFor(d=>d.Name)</th>*@
+                <th>
+                    <div style="width:50%;float:left;text-align:left">@Html.DisplayNameFor(d=>d.Name)</div>
+                    <div style="width:50%;float:right;text-align:right">
+                        <a asp-controller="Departments"
+                           asp-action="GetIndexView"
+                           asp-route-sortType="Name"
+                           asp-route-sortOrder="asc"
+                           asp-route-search="@ViewBag.CurrentSearch"
+                           asp-route-pageSize="@ViewBag.PageSize"
+                           asp-route-pageNumber="@ViewBag.PageNumber"
+                           style="text-decoration:none">
+                            <i class="bi bi-arrow-up"></i>
+                        </a>
+                        <a asp-controller="Departments"
+                           asp-action="GetIndexView"
+                           asp-route-sortType="Name"
+                           asp-route-sortOrder="desc"
+                           asp-route-search="@ViewBag.CurrentSearch"
+                           asp-route-pageSize="@ViewBag.PageSize"
+                           asp-route-pageNumber="@ViewBag.PageNumber"
+                           style="text-decoration:none">
+                            <i class="bi bi-arrow-down"></i>
+                        </a>
+                    </div>
+
+                </th>
+                @*<th>@Html.DisplayNameFor(d=>d.Description)</th>*@
+                <th>
+                    <div style="width:50%;float:left;text-align:left">@Html.DisplayNameFor(d=>d.Description)</div>
+                    <div style="width:50%;float:right;text-align:right">
+                        <a asp-controller="Departments"
+                           asp-action="GetIndexView"
+                           asp-route-sortType="Description"
+                           asp-route-sortOrder="asc"
+                           asp-route-search="@ViewBag.CurrentSearch"
+                           asp-route-pageSize="@ViewBag.PageSize"
+                           asp-route-pageNumber="@ViewBag.PageNumber"
+                           style="text-decoration:none">
+                            <i class="bi bi-arrow-up"></i>
+                        </a>
+                        <a asp-controller="Departments"
+                           asp-action="GetIndexView"
+                           asp-route-sortType="Description"
+                           asp-route-sortOrder="desc"
+                           asp-route-search="@ViewBag.CurrentSearch"
+                           asp-route-pageSize="@ViewBag.PageSize"
+                           asp-route-pageNumber="@ViewBag.PageNumber"
+                           style="text-decoration:none">
+                            <i class="bi bi-arrow-down"></i>
+                        </a>
+                    </div>
+
+                </th>
+                <th>@Html.DisplayNameFor(d=>d.AnnualBudget)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.AnnualBudget</td>
+                    <td>
+                        <a asp-controller="Departments" asp-action="GetDetailsView" asp-route-id="@item.Id" class="btn btn-outline-warning"><i class="bi bi-list-ul"></i></a>
+                        <a asp-controller="Departments" asp-action="GetEditView" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-controller="Departments" asp-action="GetDeleteView" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="bi bi-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr><th colspan="3" style="text-align:right">Total</th><th>@Model.Sum(dept => dept.AnnualBudget)</th></tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h1 class="alert alert-danger text-center">There is no data.</h1>
+}
+
+<partial name="_TechnicalSupportContacts" />
+
+
+

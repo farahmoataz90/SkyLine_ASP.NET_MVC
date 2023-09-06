@@ -1,0 +1,56 @@
+﻿@model Department
+<h1 class="alert alert-success text-center">Edit Department</h1>
+
+<div class="row">
+    <form class="col-4" method="post" asp-controller="Departments" asp-action="EditCurrent" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+
+        <div>
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Description"></label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="AnnualBudget"></label>
+            <input type="number" asp-for="AnnualBudget" class="form-control" />
+            <span asp-validation-for="AnnualBudget" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="StartDate"></label>
+            <input asp-for="StartDate" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="IsActive"></label>
+            <input asp-for="IsActive" />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mt-2">Edit</button>
+    </form>
+
+</div>
+
+<a asp-controller="Departments" asp-action="GetIndexView">Back to List</a>
+
+@section Scripts{
+    <script>
+        function SetImgSrc() {
+            // var imageFormFileFirstFile = document.getElementById("imageFormFile").files[0];
+            // var imageFormFileUrl = window.URL.createObjectURL(imageFormFileFirstFile);
+            // document.getElementById("deptImage").src = imageFormFileUrl;
+            document.getElementById("deptImage").src = window.URL.createObjectURL(document.getElementById("imageFormFile").files[0]);
+        }
+    </script>
+}

@@ -1,0 +1,56 @@
+﻿@{
+    Employee emp = (Employee)ViewBag.CurrentEmployee;
+    byte intAppraisal = Convert.ToByte(emp.Appraisal / 20);
+    bool half = (emp.Appraisal % 20) >= 0.5;
+
+}
+<div class="row">
+    <dl class="col-6 row">
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.Id)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.Id)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.FullName)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.FullName)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.Position)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.Position)</dd>
+
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.Salary)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.Salary)</dd>
+
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.Salary)</dt>
+        <dd class="col-10">
+            <div>
+                @for (var i =0;i < 5; i++)
+                {
+                    
+                }
+                @Html.DisplayFor(e=>emp.Salary)
+            </div>
+        </dd>
+
+
+
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.BirthDate)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.BirthDate)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.JoinDateTime)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.JoinDateTime)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.IsActive)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.IsActive)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.PhoneNumber)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.PhoneNumber)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.AttendanceTime)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.AttendanceTime)</dd>
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.Code)</dt>
+        <dd class="col-10">@Html.DisplayFor(e=>emp.Code)</dd>
+
+        <dt class="col-2">@Html.DisplayNameFor(e=>emp.DepartmentId)</dt>
+        <dd class="col-10">
+            <a asp-controller="Departments" asp-action="GetDetailsView" asp-route-id="@emp.DepartmentId" style="text-decoration:none">
+                @Html.DisplayFor(e=>emp.Department.Name) (@Html.DisplayFor(e=>emp.Department.Description))
+            </a>
+        </dd>
+    </dl>
+
+    @* <img src="@emp.ImagePath" class="col-4 card" style="width:100%; aspect-ratio:1/1" /> *@
+    <img src="@emp.ImagePath" class="col-4 card" style="object-fit:contain" />
+    @* <img src="@emp.ImagePath" class="col-6 card" /> *@
+</div>
